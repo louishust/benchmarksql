@@ -80,6 +80,7 @@ Instructions for running BenchmarkSQL on PostgreSQL
     threads and 64-512GBi, of RAM we are talking about thousands of
     warehouses and hundreds of concurrent database connections.
 
+
 4. Build the schema and initial database load
 
     Execute the runDatabaseBuild.sh script with your configuration file.
@@ -125,7 +126,32 @@ Instructions for running BenchmarkSQL on PostgreSQL
     vacuum analyze;
     [wieck@localhost run]$
 
-5. Run the configured benchmark
+5. Build the schema and initial database load(for cockroach)
+
+    Cockroachdb is not compatible with PG completely, So we should init data in pg first like step 4, then import data from pu_dump.
+
+    [wieck@localhost run]$ psql -p 26257 -h localhost -d benchmarksql -U root< tableCreates.sql
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+    CREATE TABLE
+
+    [wieck@localhost run]$  pg_dump -p5432 -h localhost -d benchmarksql -U root > 1warehouses-cock.sql
+
+    Modify the 1warehouses-cock.sql according [cockroach import data](https://www.cockroachlabs.com/docs/stable/import-data.html), make sure the sql file just contain `COPY` statement.
+
+    [wieck@localhost run]$  psql -p26257 -h localhost -d benchmarksql -U root < 1warehouses-cock.sql
+
+    [wieck@localhost run]$  psql -p26257 -h localhost -d benchmarksql -U root < foreignKeys.sql
+
+
+6. Run the configured benchmark
 
     [wieck@localhost run]$ ./runBenchmark.sh my_postgres.properties
 
@@ -143,7 +169,7 @@ Instructions for running BenchmarkSQL on PostgreSQL
 
     At this point you have a working setup.
 
-6. Scale the benchmark configuration.
+7. Scale the benchmark configuration.
 
     Change the my_postgres.properties file to the correct scaling
     (number of warehouses and concurrent connections/terminals). Switch
@@ -161,7 +187,7 @@ Instructions for running BenchmarkSQL on PostgreSQL
 
     Rinse and repeat.
 
-7. Result report
+8. Result report
 
     BenchmarkSQL collects detailed performance statistics and (if
     configured) OS performance data. The example configuration file

@@ -1,8 +1,8 @@
 db=postgres
 driver=org.postgresql.Driver
-conn=jdbc:postgresql://localhost:5432/benchmarksql
-user=benchmarksql
-password=changeme
+conn=jdbc:postgresql://localhost:26257/benchmarksql
+user=root
+password=
 
 warehouses=1
 loadWorkers=4
