@@ -142,9 +142,9 @@ Instructions for running BenchmarkSQL on PostgreSQL
     CREATE TABLE
     CREATE TABLE
 
-    [wieck@localhost run]$  pg_dump -p5432 -h localhost -d benchmarksql -U root > 1warehouses-cock.sql
+    [wieck@localhost run]$  pg_dump -p5432 -h localhost -d benchmarksql -a -O -U benchmarksql -W > 1warehouses-cock.sql
 
-    Modify the 1warehouses-cock.sql according [cockroach import data](https://www.cockroachlabs.com/docs/stable/import-data.html), make sure the sql file just contain `COPY` statement.
+    Modify the 1warehouses-cock.sql according [cockroach import data](https://www.cockroachlabs.com/docs/stable/import-data.html), make sure the sql file just contain `COPY` statement, tail -n +18 1warehouses.sql > 1warehouses-cock.sql
 
     [wieck@localhost run]$  psql -p26257 -h localhost -d benchmarksql -U root < 1warehouses-cock.sql
 

@@ -897,8 +897,8 @@ public class jTPCCTData
 		rs.close();
 
 		stmt = db.stmtPaymentUpdateCustomerWithData;
-		stmt.setDouble(1, payment.h_amount);
-		stmt.setDouble(2, payment.h_amount);
+	    stmt1.setBigDecimal(1, d);
+	    stmt1.setBigDecimal(2, d);
 
 		StringBuffer sbData = new StringBuffer();
 		Formatter fmtData = new Formatter(sbData);
