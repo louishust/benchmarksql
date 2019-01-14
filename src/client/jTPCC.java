@@ -300,6 +300,10 @@ public class jTPCC implements jTPCCConfig
 				"isc_tpb_write," +
 				"isc_tpb_wait");
 			break;
+		    case DB_MYSQL:
+			dbProps.setProperty("useSSL", "false");
+			dbProps.setProperty("verifyServerCertificate", "false");
+			break;
 
 		    default:
 			    break;

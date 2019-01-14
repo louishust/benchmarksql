@@ -85,7 +85,10 @@ public class LoadData
 	dbProps = new Properties();
 	dbProps.setProperty("user", iniGetString("user"));
 	dbProps.setProperty("password", iniGetString("password"));
-
+	if (iniGetString("db") == "mysql") {
+		dbProps.setProperty("useSSL", "false");
+		dbProps.setProperty("verifyServerCertificate", "false");
+	}
 	/*
 	 * Parse other vital information from the props file.
 	 */

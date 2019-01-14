@@ -30,9 +30,17 @@ public class ExecJDBC {
     // Register jdbcDriver
     Class.forName(ini.getProperty( "driver" ));
 
+     Properties   dbProps;
+	  dbProps = new Properties();
+	  dbProps.setProperty("user", ini.getProperty("user"));
+	  dbProps.setProperty("password", ini.getProperty("password"));
+	  if (ini.getProperty("db") == "mysql") {
+		  dbProps.setProperty("useSSL", "false");
+			dbProps.setProperty("verifyServerCertificate", "false");
+	  }
     // make connection
     conn = DriverManager.getConnection(ini.getProperty("conn"),
-      ini.getProperty("user"),ini.getProperty("password"));
+      dbProps);
     conn.setAutoCommit(true);
 
     // Create Statement

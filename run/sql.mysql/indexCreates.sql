@@ -3,4 +3,3 @@ create index bmsql_customer_idx1
 
 create unique index bmsql_oorder_idx1
   on  bmsql_oorder (o_w_id, o_d_id, o_carrier_id, o_id);
-
